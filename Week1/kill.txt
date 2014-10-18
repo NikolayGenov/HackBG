@@ -1,0 +1,4 @@
+Kill command can do really few things - send a specific signal, list all possible signals, and show signal information in as a table.
+The main work of is done by send_signals function, which checks for pid and errors and then calls a system call on line 208 with arguments pid and signal number.
+In the main function there are checks for validity of the given arguments. If everything is correct and there is no list option being called, then send_signals function is being called on the last (312th) line.
+ 
