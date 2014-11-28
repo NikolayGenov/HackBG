@@ -1,0 +1,3 @@
+/var/log/messages
+/var/log/error
+/var/log/syslog
