@@ -2,28 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define CHUNK_SIZE 256
+#define CHUNK_SIZE  256
 
 typedef struct node {
     char* val;
-    struct node* next;
+    struct node * next;
 } node_t;
 
-void push(node_t* head, char* val) {
-    node_t* current = head;
+void push(node_t * head, char* val) {
+    node_t * current = head;
     while (current->next != NULL) {
         current = current->next;
     }
     /* now we can add a new variable */
     current->next = malloc(sizeof(node_t));
     current->next->val = malloc(CHUNK_SIZE);
-    strncpy(current->next->val, val, CHUNK_SIZE - 1);
-    current->next->val[CHUNK_SIZE - 1] = '\0';
+    strncpy(current->next->val,val,CHUNK_SIZE - 1);
+    current->next->val[CHUNK_SIZE-1] = '\0';
     current->next->next = NULL;
 }
 
-void delete_all_list(node_t* head) {
-    node_t* current = head;
+void delete_all_list(node_t * head) {
+    node_t * current = head;
 
     while (current != NULL) {
         free(current->val);
@@ -32,8 +32,8 @@ void delete_all_list(node_t* head) {
         free(cur);
     }
 }
-void print_list(node_t* head) {
-    node_t* current = head;
+void print_list(node_t * head) {
+    node_t * current = head;
 
     while (current != NULL) {
         printf("%s\n", current->val);
@@ -41,10 +41,10 @@ void print_list(node_t* head) {
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]){
 
-    if (argc != 2) {
-        fputs("Error - wrong number of argumets", stderr);
+    if(argc != 2){
+        fputs("Error - wrong number of argumets",stderr);
         exit(1);
     }
     char* name = argv[1];
@@ -53,35 +53,35 @@ int main(int argc, char* argv[]) {
     int i, flag = 1;
 
     if (fp == NULL) {
-        fputs("Can't open input file \n", stderr);
+        fputs("Can't open input file \n",stderr);
         exit(1);
     }
-    fseek(fp, 0, SEEK_SET);
+    fseek(fp,0,SEEK_SET);
     size_t bytesRead, bufSize = 1;
 
     node_t* head = NULL;
     head = malloc(sizeof(node_t));
-    head->val = (char*)malloc(sizeof(char*));
-    head->val[0] = '\0';
+    head->val =(char* ) malloc(sizeof(char*));
+    head->val[0]= '\0';
     head->next = NULL;
 
-    do {
-        bytesRead = fread(buffer, sizeof(char), CHUNK_SIZE - 1, fp);
-        if (buffer == NULL) {
-            fputs("Reading allocating memory\n", stderr);
-            exit(1);
+    do{
+        bytesRead = fread(buffer , sizeof(char), CHUNK_SIZE - 1, fp);
+        if (buffer == NULL){
+            fputs ("Reading allocating memory\n",stderr);
+            exit (1);
         }
-        if (bytesRead != CHUNK_SIZE - 1) {
+        if(bytesRead != CHUNK_SIZE - 1){
             flag = 0;
         }
         push(head, buffer);
         //  printf("%d\n",(int) pos);
         /* Do stuff here */
-    } while (flag);
+    }while(flag);
+    //DO STUFF
+    //   print_list(head);
 
-    print_list(head);
-
-    // DELETE STUFF
+    //DELETE STUFF
     fclose(fp);
     delete_all_list(head);
     puts("Done ;)\n");

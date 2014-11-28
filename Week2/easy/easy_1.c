@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 
     if (argc != 2) {
         fputs("Error - wrong number of argumets", stderr);
